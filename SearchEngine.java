@@ -5,14 +5,13 @@ import java.util.ArrayList;
 class Handler implements URLHandler {
     // The one bit of state on the server: a number that will be manipulated by
     // various requests.
-    int num = 0;
+    ArrayList<String> list = new ArrayList<>();
 
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
-            return String.format("Number: %d", num);
+            return "Current list: " + list.toString();
         } else {
             System.out.println("Path: " + url.getPath());
-            ArrayList<String> list = new ArrayList<>();
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 list.add(parameters[1]);
